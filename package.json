@@ -1,0 +1,7 @@
+{
+  "name": "agps.js",
+  "version": "0.0.0",
+  "dependencies": {
+    "ftp": "^0.3.8"
+  }
+}
