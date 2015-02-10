@@ -109,7 +109,7 @@ var ChildProcess = require('child_process');
 
 function dayOfYear(t) {
   var start = new Date(t.getUTCFullYear(), 0, 0);
-  var diff = t - start;
+  var diff = t - start + t.getTimezoneOffset() * 60 * 1000;
   var oneDay = 1000 * 60 * 60 * 24;
   var day = Math.floor(diff / oneDay);
   return Math.floor(day);
@@ -140,7 +140,7 @@ function fetchRinex(template) {
         data += chunk;
       });
       filter.stdout.on('end', function () {
-        console.log(JSON.stringify(parseRinex(data)));
+        console.log(parseRinex(data));
       });
     });
   });
