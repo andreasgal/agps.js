@@ -1,9 +1,11 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
+var express = require('express');
+var compress = require('compression');
+
 var fetch = require('./fetch.js');
 var rinex = require('./rinex.js');
-var express = require('express');
 
 var source = 'ftp://cddis.gsfc.nasa.gov/gnss/data/hourly/${yyyy}/${ddd}/hour${ddd}0.15n.Z';
 
@@ -18,6 +20,7 @@ function fetchAndParse(source, callback) {
 }
 
 var app = express();
+app.use(compress());
 
 app.get('/', function (req, res) {
   fetchAndParse(source, function (err, data) {
@@ -25,6 +28,7 @@ app.get('/', function (req, res) {
       res.status(500).send("Internal error");
       return;
     }
+    res.setHeader('Cache-Control', 'public, max-age=300');
     res.format({
       'application/json': function() {
         res.send(data);
