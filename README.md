@@ -1,9 +1,13 @@
 # agps.js
 
-Assisted GPS in JavaScript
+Assisted GPS server
 
-Fetch the latest available GPS ephemeris data from NASA / CDDIS and dump as JSON:
+HTTP server that fetches the lastest available GPS ephemeris data from NASA / CDDIS and makes
+it available in JSON.
+
+The data is fetched from NASA on every request. Make sure you run a cache in front of this
+server to avoid melting it.
 
 ```
-node ephemeris.js
+node agps.js
 ```
