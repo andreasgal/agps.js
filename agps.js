@@ -3,7 +3,7 @@
 
 var fetch = require('./fetch.js');
 var rinex = require('./rinex.js');
-var http = require('http');
+var express = require('express');
 
 var source = 'ftp://cddis.gsfc.nasa.gov/gnss/data/hourly/${yyyy}/${ddd}/hour${ddd}0.15n.Z';
 
@@ -17,17 +17,19 @@ function fetchAndParse(source, callback) {
   });
 }
 
-var server = http.createServer(function (request, response) {
+var app = express();
+
+app.get('/', function (req, res) {
   fetchAndParse(source, function (err, data) {
     if (err) {
-      response.writeHead(501);
-      response.end("Not implemented.");
-    } else {
-      if (request.url === '/json') {
-        response.writeHead(200, {"Content-Type": "text/json"});
-        response.end(JSON.stringify(data));
-      } else {
-        response.writeHead(200, {"Content-Type": "text/html"});
+      res.status(500).send("Internal error");
+      return;
+    }
+    res.format({
+      'application/json': function() {
+        res.send(data);
+      },
+      'text/html': function() {
         var html = "<html>";
         html += "<head><title>AGPS status</title></head>";
         html += "<body>";
@@ -41,10 +43,10 @@ var server = http.createServer(function (request, response) {
         }
         html += "</body>";
         html += "</html>";
-        response.end(html);
+        res.send(html);
       }
-    }
+    });
   });
 });
 
-server.listen(8080);
+app.listen(8080);

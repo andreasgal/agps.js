@@ -2,6 +2,7 @@
   "name": "agps.js",
   "version": "0.0.0",
   "dependencies": {
+    "express": "^4.11.2",
     "ftp": "^0.3.8",
     "http": "0.0.0",
     "stream-to-buffer": "^0.1.0",
