@@ -2,6 +2,9 @@
   "name": "agps.js",
   "version": "0.0.0",
   "dependencies": {
-    "ftp": "^0.3.8"
+    "ftp": "^0.3.8",
+    "http": "0.0.0",
+    "stream-to-buffer": "^0.1.0",
+    "uncompress": "^1.0.1"
   }
 }
