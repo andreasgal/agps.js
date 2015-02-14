@@ -5,8 +5,11 @@
     "compression": "^1.4.0",
     "express": "^4.11.2",
     "ftp": "^0.3.8",
-    "http": "0.0.0",
     "stream-to-buffer": "^0.1.0",
     "uncompress": "^1.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreasgal/agps.js.git"
   }
 }
