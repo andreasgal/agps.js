@@ -5,6 +5,7 @@ var Url = require('url');
 var Ftp = require('ftp');
 var streamToBuffer = require('stream-to-buffer');
 var uncompress = require('uncompress');
+var time = require('time');
 
 function replaceAll(haystack, needle, other) {
   var pre = haystack;
@@ -17,7 +18,7 @@ function replaceAll(haystack, needle, other) {
 }
 
 function dayOfYear(t) {
-  var start = new Date(t.getUTCFullYear(), 0, 0);
+  var start = new Date(t.getFullYear(), 0, 0);
   var diff = t - start + t.getTimezoneOffset() * 60 * 1000;
   var oneDay = 1000 * 60 * 60 * 24;
   var day = Math.floor(diff / oneDay);
@@ -26,11 +27,13 @@ function dayOfYear(t) {
 
 function fetch(template, callback) {
   // parse the url template
-  var t = new Date();
+  var t = new time.Date();
+  t.setTimezone("America/New_York");
   var url = template;
-  url = replaceAll(url, '${yy}', t.getUTCFullYear() % 100);
-  url = replaceAll(url, '${yyyy}', t.getUTCFullYear());
+  url = replaceAll(url, '${yy}', t.getFullYear() % 100);
+  url = replaceAll(url, '${yyyy}', t.getFullYear());
   url = replaceAll(url, '${ddd}', ('000' + dayOfYear(t)).substr(-3));
+  console.log("fetching " + url);
   url = Url.parse(url);
   var c = new Ftp();
   c.on('ready', function() {

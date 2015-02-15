@@ -26,8 +26,10 @@ var state = {
 };
 function update() {
   fetchAndParse(source, function (err, data) {
-    if (err)
+    if (err) {
+      console.log(err, err.stack);
       return;
+    }
     state.data = data;
     state.timestamp = Date.now();
   });
@@ -36,7 +38,10 @@ function update() {
 update();
 
 var app = express();
+
 app.use(compress());
+
+app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
   if (!state.data) {
@@ -53,6 +58,8 @@ app.get('/', function (req, res) {
       res.send(state.data);
     },
     'text/html': function() {
+      res.render("index.ejs");
+      /*
       var html = "<html>";
       html += "<head><title>AGPS status</title></head>";
       html += "<body>";
@@ -68,6 +75,7 @@ app.get('/', function (req, res) {
       html += "</body>";
       html += "</html>";
       res.send(html);
+      */
     }
   });
 });
