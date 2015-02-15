@@ -8,8 +8,10 @@
 </head>
 <body>
 
-<div class="timestamp">
-  Last updated: <%= new Date(timestamp) %>
+<div class="status">
+  <div>Last updated: <%= new Date(timestamp) %></div>
+  <div>Data available: <%= navs.length %> satellites</div>
+  <div>Oldest navigation message: <%= Math.floor((Date.now() - oldest) / 60 / 1000) %> minutes</div>
 </div>
 
 <% navs.forEach(function (nav) { %>

@@ -59,10 +59,18 @@ app.get('/', function (req, res) {
     },
     'text/html': function() {
       var navs = [];
-      for (var n = 1; n <= 32; ++n)
-        navs.push(state.data[n]);
+      var oldest = null;
+      for (var n = 1; n <= 32; ++n) {
+        var nav = state.data[n];
+        if (!nav)
+          continue;
+        if (!oldest || nav.Toc < oldest)
+          oldest = nav.Toc;
+        navs.push(nav);
+      }
       res.locals.navs = navs;
       res.locals.timestamp = new Date(state.timestamp);
+      res.locals.oldest = oldest;
       res.render("index.ejs");
     }
   });

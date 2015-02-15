@@ -15,7 +15,7 @@ table > tbody > tr > td:first-child {
   font-weight: bold;
 }
 
-div.timestamp {
+div.status {
   position: fixed;
   top: 0;
   right: 0;
