@@ -12,11 +12,11 @@
   <div>Last updated: <%= new Date(timestamp) %></div>
   <table class="ages">
     <tr>
-      <% Object.keys(navs).forEach(function (key) { %>
-	<td>
-          <%= navs[key] ? ("0" + Math.max(0, Math.ceil((Date.now() - navs[key].Toc) / 1000 / 60 / 60))).substr(-2) : "" %>
+      <% for (var key = 1; key <= 32; ++key) { %>
+	<td style="<%= age(navs[key]) %>">
+	  <%= key %>
         </td>
-      <% }); %>
+      <% } %>
     </tr>
   </table>
 </div>

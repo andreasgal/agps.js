@@ -60,9 +60,18 @@ app.get('/', function (req, res) {
     'text/html': function() {
       var navs = [];
       for (var n = 1; n <= 32; ++n)
-        navs.push(state.data[n]);
+        navs[n] = state.data[n];
       res.locals.navs = navs;
       res.locals.timestamp = new Date(state.timestamp);
+      res.locals.age = function (nav) {
+        if (!nav)
+          return 0.0;
+        var diff = (Date.now() - nav.Toc) / 1000 / 60 / 60;
+        diff = Math.max(diff, 0); // if more current than now, its current
+        diff = Math.min(diff, 4); // if older than 4 hours, then its out of date (4)
+        var color = Math.floor(255 * (diff/4));
+        return "background-color:rgb(" + color + ",0,0);background-color:rgb(0," + (255-color) + ",0)";
+      }
       res.render("index.ejs");
     }
   });
