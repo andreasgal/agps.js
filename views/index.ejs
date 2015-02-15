@@ -10,12 +10,19 @@
 
 <div class="status">
   <div>Last updated: <%= new Date(timestamp) %></div>
-  <div>Data available: <%= navs.length %> satellites</div>
-  <div>Oldest navigation message: <%= Math.floor((Date.now() - oldest) / 60 / 1000) %> minutes</div>
+  <table class="ages">
+    <tr>
+      <% Object.keys(navs).forEach(function (key) { %>
+	<td>
+          <%= navs[key] ? ("0" + Math.max(0, Math.ceil((Date.now() - navs[key].Toc) / 1000 / 60 / 60))).substr(-2) : "" %>
+        </td>
+      <% }); %>
+    </tr>
+  </table>
 </div>
 
-<% navs.forEach(function (nav) { %>
-<table>
+<% navs.forEach(function (nav) { if (!nav) return; %>
+<table class="navs">
   <% Object.keys(nav).forEach(function (key) { %>
     <tr><td><%= key %></td><td><%= nav[key] %></td></tr>
   <% }); %>

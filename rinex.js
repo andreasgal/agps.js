@@ -1,6 +1,8 @@
 /* -*- Mode: Java; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab: */
 
+var time = require('time');
+
 function split(line, widths) {
   var fields = [];
   var n = 0;
@@ -24,7 +26,7 @@ function parseRecord(lines) {
   var h = lines[0][0].substr(0, 60).replace(/ +(?= )/g,'').trim().split(' ');
   var eph = {
     Prn: h[0],
-    Toc: new Date(Date.UTC((h[1]|0) + 2000, (h[2]|0)-1, h[3]|0, h[4]|0, h[5]|0, h[6]-0)),
+    Toc: new time.Date(Date.UTC((h[1]|0) + 2000, (h[2]|0)-1, h[3]|0, h[4]|0, h[5]|0, h[6]-0), "UTC"),
     Af0: parseNumber(lines[0][1]),
     Af1: parseNumber(lines[0][2]),
     Af2: parseNumber(lines[0][3]),
