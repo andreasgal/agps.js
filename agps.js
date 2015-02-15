@@ -58,24 +58,12 @@ app.get('/', function (req, res) {
       res.send(state.data);
     },
     'text/html': function() {
+      var navs = [];
+      for (var n = 1; n <= 32; ++n)
+        navs.push(state.data[n]);
+      res.locals.navs = navs;
+      res.locals.timestamp = new Date(state.timestamp);
       res.render("index.ejs");
-      /*
-      var html = "<html>";
-      html += "<head><title>AGPS status</title></head>";
-      html += "<body>";
-      html += "<h1>Last updated: " + new Date(state.timestamp) + "</h1>";
-      for (var n = 1; n <= 32; ++n) {
-        html += "<table>";
-        var eph = state.data[n];
-        Object.keys(eph).forEach(function (key) {
-          html += "<tr><td><b>" + key + "</b>: </td><td>" + eph[key] + "</td></td>";
-        });
-        html += "</table>";
-      }
-      html += "</body>";
-      html += "</html>";
-      res.send(html);
-      */
     }
   });
 });

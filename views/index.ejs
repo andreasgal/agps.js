@@ -4,11 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AGPS status</title>
-  <link rel="stylesheet" href="/public/styles.css">
+  <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
 
-Foo!
+<h1>
+  Last updated: <%= new Date(timestamp) %>
+</h1>
+
+<% navs.forEach(function (nav) { %>
+<table>
+  <% Object.keys(nav).forEach(function (key) { %>
+    <tr><td><%= key %></td><td><%= nav[key] %></td></tr>
+  <% }); %>
+</table>
+<% }); %>
 
 </body>
 </html>
