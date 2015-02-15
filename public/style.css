@@ -21,6 +21,9 @@ div.status {
   right: 0;
   padding: 10px 10px 10px 10px;
   background-color: yellow;
+}
+
+div.status > div:first-child {
   font-size: 120%;
   font-weight: bold;
 }
