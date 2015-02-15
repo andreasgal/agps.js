@@ -1,0 +1,26 @@
+table {
+  width: 100%;
+  border: 0 0 0 0;
+  padding: 0 0 0 0;
+  border-collapse: collapse;
+}
+
+table > tbody > tr:first-child {
+  font-size: 200%;
+  font-weight: bold;
+  background-color: #dddddd;
+}
+
+table > tbody > tr > td:first-child {
+  font-weight: bold;
+}
+
+div.timestamp {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 10px 10px;
+  background-color: yellow;
+  font-size: 120%;
+  font-weight: bold;
+}
