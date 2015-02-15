@@ -12,5 +12,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/andreasgal/agps.js.git"
-  }
+  },
+  "scripts": {
+    "start": "node agps.js"
+  },
+  "main": "gps.js"
 }
