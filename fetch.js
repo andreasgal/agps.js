@@ -18,17 +18,17 @@ function replaceAll(haystack, needle, other) {
 }
 
 function dayOfYear(t) {
-  var start = new Date(t.getFullYear(), 0, 0);
-  var diff = t - start + t.getTimezoneOffset() * 60 * 1000;
+  var start = new time.Date(t.getFullYear(), 0, 1, "GMT");
+  var diff = t - start;
   var oneDay = 1000 * 60 * 60 * 24;
-  var day = Math.floor(diff / oneDay);
-  return Math.floor(day);
+  var day = diff / oneDay;
+  return Math.ceil(day);
 }
 
 function fetch(template, callback) {
   // parse the url template
   var t = new time.Date();
-  t.setTimezone("America/New_York");
+  t.setTimezone("GMT");
   var url = template;
   url = replaceAll(url, '${yy}', t.getFullYear() % 100);
   url = replaceAll(url, '${yyyy}', t.getFullYear());
