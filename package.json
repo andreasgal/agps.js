@@ -7,6 +7,7 @@
     "express": "^4.11.2",
     "ftp": "^0.3.8",
     "stream-to-buffer": "^0.1.0",
+    "time": "^0.11.1",
     "uncompress": "^1.0.1"
   },
   "repository": {
